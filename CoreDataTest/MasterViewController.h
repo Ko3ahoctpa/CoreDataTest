@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface MasterViewController : UIViewController
+@interface MasterViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+
+
+@property (strong, nonatomic) NSManagedObjectContext *managerContext;
+@property (strong, nonatomic) NSArray *usersArray;
+
 
 @end

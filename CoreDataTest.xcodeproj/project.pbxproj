@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		323C22C81A18C9E500BF75A2 /* EditUserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 323C22C71A18C9E500BF75A2 /* EditUserController.m */; };
+		323C22CB1A18CD2900BF75A2 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 323C22CA1A18CD2900BF75A2 /* MasterViewController.m */; };
 		3274C8371A166D3800B4EF35 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3274C8361A166D3800B4EF35 /* main.m */; };
 		3274C83A1A166D3800B4EF35 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3274C8391A166D3800B4EF35 /* AppDelegate.m */; };
 		3274C83D1A166D3800B4EF35 /* CoreDataTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3274C83B1A166D3800B4EF35 /* CoreDataTest.xcdatamodeld */; };
@@ -29,6 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		323C22C61A18C9E500BF75A2 /* EditUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditUserController.h; path = ../EditUserController.h; sourceTree = "<group>"; };
+		323C22C71A18C9E500BF75A2 /* EditUserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditUserController.m; path = ../EditUserController.m; sourceTree = "<group>"; };
+		323C22C91A18CD2900BF75A2 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		323C22CA1A18CD2900BF75A2 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		3274C8311A166D3800B4EF35 /* CoreDataTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDataTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3274C8351A166D3800B4EF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3274C8361A166D3800B4EF35 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -90,6 +96,10 @@
 				3274C85E1A1671FB00B4EF35 /* User.m */,
 				3274C8381A166D3800B4EF35 /* AppDelegate.h */,
 				3274C8391A166D3800B4EF35 /* AppDelegate.m */,
+				323C22C61A18C9E500BF75A2 /* EditUserController.h */,
+				323C22C71A18C9E500BF75A2 /* EditUserController.m */,
+				323C22C91A18CD2900BF75A2 /* MasterViewController.h */,
+				323C22CA1A18CD2900BF75A2 /* MasterViewController.m */,
 				3274C83E1A166D3800B4EF35 /* ViewController.h */,
 				3274C83F1A166D3800B4EF35 /* ViewController.m */,
 				3274C8411A166D3800B4EF35 /* Main.storyboard */,
@@ -227,11 +237,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				323C22C81A18C9E500BF75A2 /* EditUserController.m in Sources */,
 				3274C85F1A1671FB00B4EF35 /* User.m in Sources */,
 				3274C83A1A166D3800B4EF35 /* AppDelegate.m in Sources */,
 				3274C83D1A166D3800B4EF35 /* CoreDataTest.xcdatamodeld in Sources */,
 				3274C8401A166D3800B4EF35 /* ViewController.m in Sources */,
 				3274C8371A166D3800B4EF35 /* main.m in Sources */,
+				323C22CB1A18CD2900BF75A2 /* MasterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +434,7 @@
 				3274C8591A166D3800B4EF35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3274C85A1A166D3800B4EF35 /* Build configuration list for PBXNativeTarget "CoreDataTestTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +443,7 @@
 				3274C85C1A166D3800B4EF35 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

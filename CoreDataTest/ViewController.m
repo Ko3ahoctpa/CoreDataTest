@@ -51,16 +51,15 @@
 
 - (IBAction)buttonAd:(UIButton *)sender {
     
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    df.timeZone = [NSTimeZone localTimeZone];
-    [df setDateFormat:@"YYYY MMM HH"];
-    
-//    self.infoLabel.text = [df stringFromDate:self.datePicker.date];
-    
     User *userObj = [NSEntityDescription insertNewObjectForEntityForName:@"User"
                                                   inManagedObjectContext:self.managerContext];
     userObj.name = self.textFieldName.text;
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.timeZone = [NSTimeZone localTimeZone];
+    [df setDateFormat:@"YYYY MMM HH"];
     userObj.birthday = self.dataPicker.date;
+    
     userObj.age = @(self.textFieldAge.text.intValue);
     
     [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext]; // внесены изм. в контекс и сохранены в базу
@@ -91,8 +90,6 @@
     self.labelName.text = lastUser.name;
     self.labelBirthDay.text = [df stringFromDate:lastUser.birthday]; // или черед NSDateFormatter
     self.labelAge.text = lastUser.age.stringValue;
-    
-    NSLog(@"%@", arrayUsers);
 }
 
 
