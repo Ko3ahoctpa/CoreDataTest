@@ -67,7 +67,7 @@
     
 }
 
-// релоад таблицы
+// релоад таблицы, блеать
 
 
 - (IBAction)buttonGet:(UIButton *)sender {
