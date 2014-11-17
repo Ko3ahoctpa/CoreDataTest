@@ -11,15 +11,13 @@
 
 @interface EditUserController : UIViewController
 
+
 @property (strong, nonatomic) UIDatePicker *dataPicker;
 
 @property (strong, nonatomic) User *detail;
 
-@property (strong, nonatomic) NSManagedObjectContext *managerContext;
-
 @property (weak, nonatomic) IBOutlet UITextField *textFiedUserName;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldUserBirthDay;
 
-- (IBAction)buttonSaveUser:(UIButton *)sender;
 
 @end

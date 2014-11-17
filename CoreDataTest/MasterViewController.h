@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface MasterViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
+@interface MasterViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSManagedObjectContext *managerContext;
 @property (strong, nonatomic) NSArray *usersArray;
-
 
 @end

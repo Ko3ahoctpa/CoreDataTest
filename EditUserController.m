@@ -7,7 +7,7 @@
 //
 
 #import "EditUserController.h"
-//#import "AppDelegate.h"
+
 
 @interface EditUserController ()
 
@@ -21,26 +21,20 @@
     
     [super viewDidLoad];
     
-//    self.managerContext = [(AppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    self.navigationItem.title = @"Save user";
     
-    if (!self.detail) {
-        self.navigationItem.title = @"Add user";
-    } else {
-        self.navigationItem.title = [NSString stringWithFormat:@"Edit: %@", self.detail.name];
-        self.textFiedUserName.text = self.detail.name;
-        
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        df.timeZone = [NSTimeZone localTimeZone];
-        
-        [df setDateFormat:@"dd.MM.YYYY"];
-        
-        self.textFieldUserBirthDay.text = [df stringFromDate:self.detail.birthday];
-        }
+    self.textFiedUserName.text = self.detail.name;
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.timeZone = [NSTimeZone localTimeZone];
+    [df setDateFormat:@"dd.MM.YYYY"];
+    self.textFieldUserBirthDay.text = [df stringFromDate:self.detail.birthday];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(buttonSaveUser:)];
     
     // вызов dataPicker при нажатии на textFieldUserBirthDay
     self.dataPicker = [[UIDatePicker alloc] init];
+    self.dataPicker.datePickerMode = UIDatePickerModeDate;
     [self.dataPicker addTarget:self action:@selector(changeValueInDatePicker:) forControlEvents:UIControlEventValueChanged];
     [self.textFieldUserBirthDay setInputView:self.dataPicker];
 
@@ -48,7 +42,12 @@
 
 
 - (void)changeValueInDatePicker:(id)sender {
-    self.textFieldUserBirthDay.text = self.dataPicker.date.description;
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.timeZone = [NSTimeZone localTimeZone];
+    [df setDateFormat:@"dd.MM.YYYY"];
+    
+    self.textFieldUserBirthDay.text = [df stringFromDate:self.dataPicker.date];
 }
 
 
@@ -63,45 +62,13 @@
 
 
 - (void)buttonSaveUser:(UIButton *)sender {
+    self.detail.name = self.textFiedUserName.text;
+    self.detail.birthday = self.dataPicker.date;
     
-    if (!self.detail) {
-        
-        NSLog(@"Edit USER");
-        
-        //User *userObj = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managerContext];
-        //User *userObj = [[User alloc] init];
-        
-        //userObj.name = self.textFiedUserName.text;
-        //userObj.birthday = self.dataPicker.date;
-        //[self.managerContext save:nil];
-        
-//        [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
-        NSMutableDictionary *userDic = [[NSMutableDictionary alloc] init];
-        [userDic setObject:@"name" forKey:self.textFiedUserName.text];
-        [userDic setObject:@"birthday" forKey:self.textFieldUserBirthDay.text];
-        
-        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-        
-        [notification postNotificationName:@"editUser" object:nil userInfo:userDic];
-        
-    } else {
-        
-        self.detail.name = self.textFiedUserName.text;
-        self.detail.birthday = self.dataPicker.date;
-        
-//        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-//        
-//        [notification postNotificationName:@"saveUser" object:nil];
-//        
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-        
-        NSLog(@"Save USER");
-    }
+//    Генерируем событие
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"saveUser" object:nil];
     
-    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-    
-    [notification postNotificationName:@"saveUser" object:nil];
-    
+//    Вернуться на главный контроллер
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
