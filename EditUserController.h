@@ -13,7 +13,6 @@
 
 
 @property (strong, nonatomic) UIDatePicker *dataPicker;
-
 @property (strong, nonatomic) User *detail;
 
 @property (weak, nonatomic) IBOutlet UITextField *textFiedUserName;

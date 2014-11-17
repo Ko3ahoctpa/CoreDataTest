@@ -8,7 +8,7 @@
 
 #import "MasterViewController.h"
 #import "EditUserController.h"
-#import "AppDelegate.h"
+#import "CoreDataManager.h"
 #import "User.h"
 
 @interface MasterViewController ()
@@ -33,17 +33,17 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
 #pragma mark - Actions
 
-
 // Редактирование пользователя
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveUser:) name:@"saveUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(saveUser:)
+                                                 name:@"saveUser" object:nil];
     
     // получаем индекс выбранной
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -74,13 +74,11 @@
 }
 
 
-- (void)saveUser: (NSNotification *)n {
-    //NSLog(@"%@", self.usersArray);
-
-    // метод сохранения изменений для EDIT и ADD
-    [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
-    [self loadData];
-    //Обновить таблицу
+- (void)saveUser:(NSNotification *)notification {
+    
+    [[CoreDataManager sharedManager] saveContext]; // метод сохранения изменений для EDIT и ADD
+    
+    [self loadData]; // обновить таблицу
     [self.tableView reloadData];
 }
 
@@ -89,12 +87,12 @@
 
 //Получить данные из БД и заполнить массив
 - (void)loadData {
-    self.managerContext = [(AppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    
+    self.managerContext = [[CoreDataManager sharedManager] managedObjectContext];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
-    NSString *user = @"User";
-    NSEntityDescription *entity = [NSEntityDescription entityForName:user
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User"
                                               inManagedObjectContext:self.managerContext];
     
     [request setEntity:entity];
@@ -109,23 +107,25 @@
 }
 
 
-// Создание ячеек из массива
+// cоздание ячеек из массива
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    User *user = [self.usersArray objectAtIndex:indexPath.row];
+    User *userObj = [self.usersArray objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ (age: %@)", user.name, user.age];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (age: %@)", userObj.name, userObj.age];
     
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.timeZone = [NSTimeZone localTimeZone];
     [df setDateFormat:@"dd.MM.YYYY"];
-    cell.detailTextLabel.text = [df stringFromDate:user.birthday];
+    cell.detailTextLabel.text = [df stringFromDate:userObj.birthday];
     
     return cell;
 }
 
 
+// отписваемся от notification
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

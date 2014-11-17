@@ -17,22 +17,16 @@
 @dynamic age;
 
 
-//- (void)setBirthday:(NSDate *)birthday {
-//    
-//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-//    
-//    NSDateComponents *resultComponents = [calendar components: NSCalendarUnitYear fromDate:birthday toDate:[NSDate date] options:0];
-//    
-//    self.age = [NSNumber numberWithInteger:resultComponents.year];
-//}
-
 #pragma mark - Events change properies
 
-- (void)willChangeValueForKey:(NSString *)key{
+- (void)willChangeValueForKey:(NSString *)key {
     NSLog(@"willChangeValueForKey: %@", key);
 }
-- (void)didChangeValueForKey:(NSString *)key{
+
+
+- (void)didChangeValueForKey:(NSString *)key {
     NSLog(@"didChangeValueForKey: %@", key);
 }
+
 
 @end
