@@ -65,6 +65,11 @@
     self.detail.name = self.textFiedUserName.text;
     self.detail.birthday = self.dataPicker.date;
     
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *resultComponents = [calendar components: NSCalendarUnitYear fromDate:self.dataPicker.date toDate:[NSDate date] options:0];
+    
+    self.detail.age = [NSNumber numberWithInteger:resultComponents.year];
+    
 //    Генерируем событие
     [[NSNotificationCenter defaultCenter] postNotificationName:@"saveUser" object:nil];
     
