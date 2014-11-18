@@ -21,7 +21,24 @@
     
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Save user";
+//    self.navigationItem.title = @"Save user";
+    
+    // delegate для textFied-ов
+    self.textFiedUserName.delegate = self;
+    self.textFieldUserBirthDay.delegate = self;
+    
+    self.textFiedUserName.keyboardAppearance = UIKeyboardAppearanceDark; // стиль клавиатуры
+    self.textFiedUserName.returnKeyType = UIReturnKeyNext; // стиль клавиши RETURN
+    
+    if (!self.detail.name) {
+        self.textFiedUserName.borderStyle = UITextBorderStyleRoundedRect;
+        self.textFieldUserBirthDay.borderStyle = UITextBorderStyleRoundedRect;
+        self.navigationItem.title = @"Add user";
+    } else {
+        self.textFiedUserName.borderStyle = UITextBorderStyleNone;
+        self.textFieldUserBirthDay.borderStyle = UITextBorderStyleNone;
+        self.navigationItem.title = [NSString stringWithFormat:@"Edit %@", self.detail.name];
+    }
     
     self.textFiedUserName.text = self.detail.name;
     
@@ -38,7 +55,11 @@
     self.dataPicker.datePickerMode = UIDatePickerModeDate; // изменяем стить dataPicker
     [self.dataPicker addTarget:self action:@selector(changeValueInDatePicker:) forControlEvents:UIControlEventValueChanged];
     [self.textFieldUserBirthDay setInputView:self.dataPicker];
+}
 
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 
@@ -52,14 +73,24 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-
 // убирает клавиатуру и dataPicker при клике по view
 - (IBAction)endEditing:(id)sender {
     [self.view endEditing:YES];
+}
+
+
+#pragma mark - UITextFieldDelegate
+
+// вызывается после нажатия клавиши NEXT (return)
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if ([textField isEqual:self.textFiedUserName]) {
+        [self.textFieldUserBirthDay becomeFirstResponder]; // после нажатия клавиши RETURN курсор переключается на сл. textField
+    } /*else {
+        [textField resignFirstResponder]; // убирает клавиатуру после нажатия клавиши RETURN
+    }*/
+    
+    return YES;
 }
 
 

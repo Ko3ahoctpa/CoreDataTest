@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "User.h"
 
-@interface EditUserController : UIViewController
+@interface EditUserController : UIViewController <UITextFieldDelegate>
 
 
 @property (strong, nonatomic) UIDatePicker *dataPicker;
