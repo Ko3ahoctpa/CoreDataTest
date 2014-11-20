@@ -31,12 +31,8 @@
     self.textFiedUserName.returnKeyType = UIReturnKeyNext; // стиль клавиши RETURN
     
     if (!self.detail.name) {
-        self.textFiedUserName.borderStyle = UITextBorderStyleRoundedRect;
-        self.textFieldUserBirthDay.borderStyle = UITextBorderStyleRoundedRect;
         self.navigationItem.title = @"Add user";
     } else {
-        self.textFiedUserName.borderStyle = UITextBorderStyleNone;
-        self.textFieldUserBirthDay.borderStyle = UITextBorderStyleNone;
         self.navigationItem.title = [NSString stringWithFormat:@"Edit %@", self.detail.name];
     }
     
