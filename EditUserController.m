@@ -21,7 +21,10 @@
     
     [super viewDidLoad];
     
-//    self.navigationItem.title = @"Save user";
+    // вызов dataPicker при нажатии на textFieldUserBirthDay
+    self.dataPicker = [[UIDatePicker alloc] init];
+    self.dataPicker.datePickerMode = UIDatePickerModeDate; // изменяем стить dataPicker
+    [self.dataPicker addTarget:self action:@selector(changeValueInDatePicker:) forControlEvents:UIControlEventValueChanged];
     
     // delegate для textFied-ов
     self.textFiedUserName.delegate = self;
@@ -34,6 +37,8 @@
         self.navigationItem.title = @"Add user";
     } else {
         self.navigationItem.title = [NSString stringWithFormat:@"Edit %@", self.detail.name];
+        
+        self.dataPicker.date = self.detail.birthday;
     }
     
     self.textFiedUserName.text = self.detail.name;
@@ -46,10 +51,7 @@
     // создаем кновку SAVE USER
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(buttonSaveUser:)];
     
-    // вызов dataPicker при нажатии на textFieldUserBirthDay
-    self.dataPicker = [[UIDatePicker alloc] init];
-    self.dataPicker.datePickerMode = UIDatePickerModeDate; // изменяем стить dataPicker
-    [self.dataPicker addTarget:self action:@selector(changeValueInDatePicker:) forControlEvents:UIControlEventValueChanged];
+    
     [self.textFieldUserBirthDay setInputView:self.dataPicker];
 }
 

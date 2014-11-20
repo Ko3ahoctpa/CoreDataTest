@@ -71,6 +71,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		322E10811A1E096B00261790 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3274C85D1A1671FB00B4EF35 /* User.h */,
+				3274C85E1A1671FB00B4EF35 /* User.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		322E10821A1E097D00261790 /* Controlllers */ = {
+			isa = PBXGroup;
+			children = (
+				323C22C61A18C9E500BF75A2 /* EditUserController.h */,
+				323C22C71A18C9E500BF75A2 /* EditUserController.m */,
+				323C22C91A18CD2900BF75A2 /* MasterViewController.h */,
+				323C22CA1A18CD2900BF75A2 /* MasterViewController.m */,
+			);
+			name = Controlllers;
+			sourceTree = "<group>";
+		};
+		322E10831A1E0A4800261790 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				32B2A25A1A1A7A490096A80E /* CoreDataManager.h */,
+				32B2A25B1A1A7A490096A80E /* CoreDataManager.m */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 		3274C8281A166D3800B4EF35 = {
 			isa = PBXGroup;
 			children = (
@@ -92,16 +121,11 @@
 		3274C8331A166D3800B4EF35 /* CoreDataTest */ = {
 			isa = PBXGroup;
 			children = (
-				32B2A25A1A1A7A490096A80E /* CoreDataManager.h */,
-				32B2A25B1A1A7A490096A80E /* CoreDataManager.m */,
-				3274C85D1A1671FB00B4EF35 /* User.h */,
-				3274C85E1A1671FB00B4EF35 /* User.m */,
+				322E10811A1E096B00261790 /* Models */,
+				322E10831A1E0A4800261790 /* Managers */,
 				3274C8381A166D3800B4EF35 /* AppDelegate.h */,
 				3274C8391A166D3800B4EF35 /* AppDelegate.m */,
-				323C22C61A18C9E500BF75A2 /* EditUserController.h */,
-				323C22C71A18C9E500BF75A2 /* EditUserController.m */,
-				323C22C91A18CD2900BF75A2 /* MasterViewController.h */,
-				323C22CA1A18CD2900BF75A2 /* MasterViewController.m */,
+				322E10821A1E097D00261790 /* Controlllers */,
 				3274C8411A166D3800B4EF35 /* Main.storyboard */,
 				3274C8441A166D3800B4EF35 /* Images.xcassets */,
 				3274C8461A166D3800B4EF35 /* LaunchScreen.xib */,

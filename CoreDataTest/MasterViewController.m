@@ -27,6 +27,10 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(buttonAddUser:)];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                                  selector:@selector(saveUser:)
+                                                      name:@"saveUser" object:nil];
+    
     [self loadData];
 }
 
@@ -40,10 +44,6 @@
 
 // Редактирование пользователя
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(saveUser:)
-                                                 name:@"saveUser" object:nil];
     
     // получаем индекс выбранной
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -65,10 +65,6 @@
     
     // передаем в EditUserController объект userObj
     [editView setDetail:userObj];
-    
-    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-    [notification addObserver:self selector:@selector(saveUser:) name:@"saveUser" object:nil];
-    
     
     [self.navigationController pushViewController:editView animated:YES];
 }
