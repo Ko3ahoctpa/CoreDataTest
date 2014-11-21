@@ -96,7 +96,6 @@
     } /*else {
         [textField resignFirstResponder]; // убирает клавиатуру после нажатия клавиши RETURN
     }*/
-    
     return YES;
 }
 

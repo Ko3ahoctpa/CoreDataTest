@@ -10,9 +10,13 @@
 #import <CoreData/CoreData.h>
 
 
-@interface MasterViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MasterViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managerContext;
 @property (strong, nonatomic) NSArray *usersArray;
+
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
 
 @end

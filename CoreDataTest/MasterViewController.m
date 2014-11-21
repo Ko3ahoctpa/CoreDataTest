@@ -16,20 +16,29 @@
 @end
 
 
-@implementation MasterViewController
+@implementation MasterViewController {
+   NSString *defaultTitle;
+}
+
 
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Users";
+    defaultTitle = @"Users";
+    
+    self.navigationItem.title = defaultTitle;
+    
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(buttonAddUser:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                                   selector:@selector(saveUser:)
                                                       name:@"saveUser" object:nil];
+    self.searchBar.delegate = self;
+    
+    self.searchBar.returnKeyType = UIReturnKeySearch;
     
     [self loadData];
 }
@@ -74,8 +83,7 @@
     
     [[CoreDataManager sharedManager] saveContext]; // метод сохранения изменений для EDIT и ADD
     
-    [self loadData]; // обновить таблицу
-    [self.tableView reloadData];
+    [self reloadTable];
 }
 
 
@@ -90,10 +98,16 @@
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"User"
                                               inManagedObjectContext:self.managerContext];
-    
     [request setEntity:entity];
     
     self.usersArray = [self.managerContext executeFetchRequest:request error:nil];
+}
+
+
+// получает данные из БД и перезагружает таблицу
+- (void)reloadTable {
+    [self loadData];
+    [self.tableView reloadData];
 }
 
 
@@ -139,13 +153,70 @@
             return;
         }
         
-//        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        [self loadData]; // обновить таблицу
-        [self.tableView reloadData];
+        [self reloadTable];
     }
 }
 
+
+#pragma mark - Search Bar methods
+
+// CancelButton
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+    self.searchBar.showsCancelButton = NO;
+    
+    self.searchBar.text = nil;
+    
+    [searchBar resignFirstResponder];
+    
+    self.navigationItem.title = defaultTitle;
+    [self.view endEditing:YES];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES]; //
+    
+    [self reloadTable];
+}
+
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    self.searchBar.showsCancelButton = NO;
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES]; //
+    
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if([searchText length] <= 0 ) {
+        [self reloadTable];
+        return;
+    }
+    
+    // поиск в CoreData и вывод в tableView
+    self.managerContext = [[CoreDataManager sharedManager] managedObjectContext];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name contains [cd] %@", searchText];
+    [request setPredicate:predicate];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User"
+                                              inManagedObjectContext:self.managerContext];
+    [request setEntity:entity];
+    self.usersArray = [self.managerContext executeFetchRequest:request error:nil];
+    
+    [self.tableView reloadData];
+}
+
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    
+    self.navigationItem.title = @"Search";
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    //- (void)setNavigationBarHidden:(BOOL)hidden animated:(BOOL)animated
+    self.searchBar.showsCancelButton = YES;
+}
 
 // отписваемся от notification
 - (void) dealloc {
