@@ -19,14 +19,14 @@
 
 #pragma mark - Events change properies
 
-- (void)willChangeValueForKey:(NSString *)key {
-    NSLog(@"willChangeValueForKey: %@", key);
-}
-
-
-- (void)didChangeValueForKey:(NSString *)key {
-    NSLog(@"didChangeValueForKey: %@", key);
-}
+//- (void)willChangeValueForKey:(NSString *)key {
+//    NSLog(@"willChangeValueForKey: %@", key);
+//}
+//
+//
+//- (void)didChangeValueForKey:(NSString *)key {
+//    NSLog(@"didChangeValueForKey: %@", key);
+//}
 
 
 @end

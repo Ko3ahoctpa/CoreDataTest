@@ -24,6 +24,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jIg-Fl-Fl9">
+                                <rect key="frame" x="16" y="241" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -34,6 +41,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="6pb-u8-RTC"/>
                     <connections>
+                        <outlet property="labelAge" destination="jIg-Fl-Fl9" id="Qvv-BX-be5"/>
                         <outlet property="textFiedUserName" destination="qsN-GM-ypc" id="I3Z-wZ-zlr"/>
                         <outlet property="textFieldUserBirthDay" destination="dz2-9g-aet" id="e7Z-di-WPP"/>
                     </connections>

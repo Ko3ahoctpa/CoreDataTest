@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *textFiedUserName;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldUserBirthDay;
+@property (weak, nonatomic) IBOutlet UILabel *labelAge;
 
 
 @end

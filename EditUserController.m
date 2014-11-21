@@ -43,6 +43,8 @@
     
     self.textFiedUserName.text = self.detail.name;
     
+    [self setAge:self.detail.age];
+    
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.timeZone = [NSTimeZone localTimeZone];
     [df setDateFormat:@"dd.MM.YYYY"];
@@ -68,6 +70,13 @@
     [df setDateFormat:@"dd.MM.YYYY"];
     
     self.textFieldUserBirthDay.text = [df stringFromDate:self.dataPicker.date];
+    
+    // вычисление возроста (текущая дата - ДР)
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *resultComponents = [calendar components: NSCalendarUnitYear fromDate:self.dataPicker.date toDate:[NSDate date] options:0];
+    self.detail.age = [NSNumber numberWithInteger:resultComponents.year];
+    
+    [self setAge:self.detail.age];
 }
 
 
@@ -97,18 +106,21 @@
     self.detail.name = self.textFiedUserName.text;
     
     self.detail.birthday = self.dataPicker.date;
-    
-    // вычисление возроста (текущая дата - ДР)
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *resultComponents = [calendar components: NSCalendarUnitYear fromDate:self.dataPicker.date toDate:[NSDate date] options:0];
-    self.detail.age = [NSNumber numberWithInteger:resultComponents.year];
-    
+   
     // генерируем событие
     [[NSNotificationCenter defaultCenter] postNotificationName:@"saveUser" object:nil];
     
     // вернуться на главный контроллер
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+
+- (void)setAge: (NSNumber*) age {
+    
+    self.labelAge.text = [NSString stringWithFormat:@"age: %@", age];
+}
+
+
 
 
 @end
